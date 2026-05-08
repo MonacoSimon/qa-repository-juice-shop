@@ -51,11 +51,19 @@ pipeline {
         }
         success {
             archiveArtifacts artifacts: 'results-docker/**/*', allowEmptyArchive: true
-            publishHTML([
-                reportDir: 'results-docker/newman',
-                reportFiles: 'report.xml',
-                reportName: 'API Test Results'
-            ])
+            
+            // Publicar resultados JUnit
+            junit 'results-docker/**/*.xml'
+            
+            // TODO: Instalar HTML Publisher plugin y descomentar esto
+            // publishHTML([
+            //     allowMissing: true,
+            //     alwaysLinkToLastBuild: false,
+            //     keepAll: false,
+            //     reportDir: 'results-docker/newman',
+            //     reportFiles: 'report.html',
+            //     reportName: 'API Test Results'
+            // ])
         }
     }
 }
