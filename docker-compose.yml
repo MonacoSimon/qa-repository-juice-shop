@@ -1,0 +1,63 @@
+services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    ports:
+      - "3000:3000"
+
+  cypress-tests:
+    build:
+      context: ./automation
+      dockerfile: Dockerfile
+    volumes:
+      - ./automation/cypress:/e2e
+    command: cypress run --config baseUrl=http://localhost:3000,video=false,screenshotOnRunFailure=false
+    depends_on:
+      - juice-shop
+    network_mode: "host"
+    environment:
+      - CYPRESS_BASE_URL=http://localhost:3000
+      - CYPRESS_VIDEO=false
+      - CYPRESS_SCREENSHOT_ON_RUN_FAILURE=false
+
+  zap-tests:
+    image: zaproxy/zap-stable:latest
+    user: root
+    volumes:
+      - ./results-docker/zap:/zap/wrk
+    command: >
+      zap-baseline.py -t http://localhost:3000/#/ -r reporte.html -I
+    depends_on:
+      - juice-shop
+    network_mode: "host"
+
+  api-tests:
+    image: postman/newman:latest
+    volumes:
+      - ./api-testing/postman:/etc/newman/postman
+      - ./results-docker/newman:/etc/newman/results
+    entrypoint: sh
+    command: -c "apk add --no-cache curl && until curl -f http://localhost:3000; do echo 'Esperando juice-shop...'; sleep 2; done && newman run /etc/newman/postman/collections/collection\\ of.postman_collection.json -e /etc/newman/postman/enviroment/juice\\ shop\\ enviroment.postman_environment.json --env-var 'urlBase=http://localhost:3000' -r cli,json,junit --reporter-json-export /etc/newman/results/report.json --reporter-junit-export /etc/newman/results/report.xml"
+    network_mode: "host"
+    depends_on:
+      - juice-shop
+  jmeter-tests:
+    image: justb4/jmeter:latest
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        for test in /tests/*.jmx; do
+          filename=$$(basename "$$test" .jmx)
+          timestamp=$$(date +%Y%m%d-%H%M%S)
+          echo "Ejecutando: $$filename"
+          jmeter -n -f -t "$$test" -l /results/$$filename.jtl -e -o /results/$$filename-report-$$timestamp -j /results/$$filename.log
+          echo "✔ Terminado: $$filename"
+          echo "-----------------------------"
+        done
+    volumes:
+      - ./performance/jmeter/test-plan:/tests
+      - ./results-docker/jmeter:/results
+    network_mode: "host"
+    depends_on:
+      - juice-shop
