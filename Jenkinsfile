@@ -1,54 +1,49 @@
 pipeline {
     agent any
-    
-    environment {
-        DOCKER_COMPOSE = "docker-compose"
-    }
-    
+
     stages {
-        stage('Setup') {
+
+        stage('Levantar Juice Shop') {
             steps {
-                sh '''
-                    # Limpiar contenedores anteriores
-                    docker-compose down --remove-orphans || true
-                    docker-compose rm -f || true
-                '''
+                sh 'docker-compose up -d juice-shop'
             }
         }
-        
-        stage('Ejecutar Pruebas') {
+
+        stage('Ejecutar pruebas') {
             parallel {
-                stage('Cypress Tests') {
+
+                stage('Cypress') {
                     steps {
-                        sh 'docker-compose up cypress-tests --abort-on-container-exit'
+                        sh 'docker-compose up cypress-tests'
                     }
                 }
-                stage('API Tests') {
+
+                stage('API') {
                     steps {
-                        sh 'docker-compose up api-tests --abort-on-container-exit'
+                        sh 'docker-compose up api-tests'
                     }
                 }
-                stage('JMeter Tests') {
+
+                stage('JMeter') {
                     steps {
-                        sh 'docker-compose up jmeter-tests --abort-on-container-exit'
+                        sh 'docker-compose up jmeter-tests'
                     }
                 }
-                stage('ZAP Tests') {
+
+                stage('ZAP') {
                     steps {
-                        sh 'docker-compose up zap-tests --abort-on-container-exit'
+                        sh 'docker-compose up zap-tests'
                     }
                 }
             }
         }
     }
-    
+
     post {
         always {
-            sh '''
-                docker-compose down --remove-orphans
-                docker-compose rm -f
-            '''
+            sh 'docker-compose down --remove-orphans'
         }
+
         success {
             archiveArtifacts artifacts: 'results-docker/**/*', allowEmptyArchive: true
             junit 'results-docker/**/*.xml'
