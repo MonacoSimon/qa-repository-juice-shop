@@ -11,7 +11,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./automation/cypress:/e2e
-    command: cypress run --config-file /e2e/cypress.config.js --config baseUrl=http://localhost:3000,video=false,screenshotOnRunFailure=false
+    command: cypress run --config baseUrl=http://localhost:3000,video=false,screenshotOnRunFailure=false
     depends_on:
       - juice-shop
     network_mode: "host"
@@ -34,10 +34,10 @@ services:
   api-tests:
     image: postman/newman:latest
     volumes:
-      - ./api-testing/postman:/etc/newman/postman
+      - ./api-testing/postman:/etc/newman
       - ./results-docker/newman:/etc/newman/results
     entrypoint: sh
-    command: -c "apk add --no-cache curl && until curl -f http://localhost:3000; do echo 'Esperando juice-shop...'; sleep 2; done && cp '/etc/newman/postman/enviroment/juice shop enviroment.postman_environment.json' /tmp/env.json && newman run /etc/newman/postman/collections/collection\\ of.postman_collection.json -e /tmp/env.json --env-var 'urlBase=http://localhost:3000' -r cli,json,junit --reporter-json-export /etc/newman/results/report.json --reporter-junit-export /etc/newman/results/report.xml"
+    command: -c "apk add --no-cache curl && until curl -f http://localhost:3000; do echo 'Esperando juice-shop...'; sleep 2; done && cp '/etc/newman/enviroment/juice shop enviroment.postman_environment.json' /tmp/env.json && newman run /etc/newman/collections/collection\\ of.postman_collection.json -e /tmp/env.json --env-var 'urlBase=http://localhost:3000' -r cli,json,junit --reporter-json-export /etc/newman/results/report.json --reporter-junit-export /etc/newman/results/report.xml"
     network_mode: "host"
     depends_on:
       - juice-shop

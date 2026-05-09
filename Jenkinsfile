@@ -52,12 +52,7 @@ pipeline {
 
         success {
             archiveArtifacts artifacts: 'results-docker/**', allowEmptyArchive: true
-            script {
-                def xmlFiles = findFiles(glob: 'results-docker/**/*.xml')
-                if (xmlFiles.length > 0) {
-                    junit 'results-docker/**/*.xml'
-                }
-            }
+            junit 'results-docker/**/*.xml'
         }
     }
 }
