@@ -1,168 +1,66 @@
 # =========================
-# GENERAL
-# =========================
-.DS_Store
-Thumbs.db
-*.swp
-*.swo
-*~
-*.tmp
-*.temp
-*.bak
+
+# Node.js
 
 # =========================
-# NODE / CYPRESS
-# =========================
+
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-# Cypress artifacts
+# =========================
+
+# Cypress
+
+# =========================
+
 cypress/videos/
 cypress/screenshots/
 cypress/downloads/
-automation/cypress/results/
-automation/cypress/cypress/videos/
-automation/cypress/cypress/screenshots/
-automation/cypress/cypress/downloads/
-
-# Cypress cache
-.cache/
-.cypress-cache/
 
 # =========================
-# ENV FILES / SECRETS
+
+# Environment variables
+
 # =========================
+
 .env
 .env.*
-!.env.example
 
 # =========================
-# DOCKER
-# =========================
-docker-data/
-*.pid
+
+# Logs
 
 # =========================
-# JMETER
-# =========================
-*.jtl
+
 *.log
-jmeter.log
-
-performance/jmeter/results/
-performance/jmeter/results-docker/
-performance/jmeter/reports/
-
-results-docker/jmeter/
-
-# generated reports
-**/report/
-**/reports/
 
 # =========================
-# NEWMAN / POSTMAN
-# =========================
-newman/
-results-newman/
 
-# generated reports
-*.html
-*.xml
-*.json
-
-# keep collections/environment files
-!postman/**/*.json
-!api-testing/postman/**/*.json
-
-# Newman reports
-api-testing/newman/results-newman/
+# OS / System
 
 # =========================
-# ZAP / SECURITY
-# =========================
-*.session
-*.session.*
-*.lobs
-zap.log
 
-security/zap-analysis/session-zap-owasp.session*
-security/docker-report/report.html
-
-results-docker/zap/
+.DS_Store
+Thumbs.db
 
 # =========================
-# LIGHTHOUSE
-# =========================
-.lighthouseci/
-*.report.html
+
+# Editor / IDE
 
 # =========================
-# TEST RESULTS / REPORTS
-# =========================
-coverage/
-reports/
-report/
-test-results/
-allure-results/
-allure-report/
 
-# screenshots / evidence generated
-screenshots/
-videos/
-
-# =========================
-# IDEs
-# =========================
-
-# VSCode
 .vscode/
-
-# IntelliJ
 .idea/
-*.iml
-
-# Eclipse
-.project
-.classpath
-.settings/
-
-# NetBeans
-nbproject/private/
 
 # =========================
-# OS / LINUX
-# =========================
-Trash/
-.directory
+
+# Misc
 
 # =========================
-# PYTHON
-# =========================
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
 
-# =========================
-# TEMP EXECUTION FILES
-# =========================
-*.out
-*.err
-
-# =========================
-# OPTIONAL LARGE FILES
-# =========================
-*.mp4
-*.zip
-*.tar
-*.gz
-
-# =========================
-# KEEP IMPORTANT DOCS
-# =========================
-!README.md
-!LICENSE
-!*.md
+coverage/
+dist/
+build/

@@ -2,11 +2,10 @@ pipeline {
     agent any
 
     stages {
-        
+
         stage('Clean up previous containers') {
             steps {
                 sh 'docker-compose down --remove-orphans || true'
-                sh 'docker rm -f juice-shop || true'
             }
         }
 
@@ -52,8 +51,13 @@ pipeline {
         }
 
         success {
-            archiveArtifacts artifacts: 'results-docker/**/*', allowEmptyArchive: true
-            junit 'results-docker/**/*.xml'
+            archiveArtifacts artifacts: 'results-docker/**', allowEmptyArchive: true
+            script {
+                def xmlFiles = findFiles(glob: 'results-docker/**/*.xml')
+                if (xmlFiles.length > 0) {
+                    junit 'results-docker/**/*.xml'
+                }
+            }
         }
     }
 }
