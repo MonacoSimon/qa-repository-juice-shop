@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+        
+        stage('Clean up previous containers') {
+            steps {
+                sh 'docker-compose down --remove-orphans || true'
+                sh 'docker rm -f juice-shop || true'
+            }
+        }
 
         stage('Levantar Juice Shop') {
             steps {
