@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="collection of" tests="9" time="0.293">
+  <testsuite name="collection of gets / get index" id="da3c2701-d81a-4c92-ace4-deb3be0153e6" timestamp="2026-05-09T17:25:09.526Z" tests="5" failures="0" errors="0" time="0.066">
+    <testcase name="status code is 200" time="0.066" classname="CollectionOf"/>
+    <testcase name="Es HTML" time="0.066" classname="CollectionOf"/>
+    <testcase name="La respuesta contiene contenido esperado" time="0.066" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.066" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.066" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="collection of gets / list products" id="bb3db189-e77d-4f1d-8b6f-280f6190dcbd" timestamp="2026-05-09T17:25:09.526Z" tests="6" failures="0" errors="0" time="0.040">
+    <testcase name="status code is 200" time="0.040" classname="CollectionOf"/>
+    <testcase name="Es json" time="0.040" classname="CollectionOf"/>
+    <testcase name="La respuesta contiene contenido esperado" time="0.040" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.040" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.040" classname="CollectionOf"/>
+    <testcase name="Producto tiene campos requeridos" time="0.040" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="collection of gets / list a product" id="7b67e8df-8320-432e-9206-239efb25b221" timestamp="2026-05-09T17:25:09.526Z" tests="5" failures="0" errors="0" time="0.012">
+    <testcase name="status code is 200" time="0.012" classname="CollectionOf"/>
+    <testcase name="Es json" time="0.012" classname="CollectionOf"/>
+    <testcase name="La respuesta contiene contenido esperado" time="0.012" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.012" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.012" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="collection of gets / get a product by id" id="ecde13c8-0c33-455b-9aad-2ea51595c742" timestamp="2026-05-09T17:25:09.526Z" tests="5" failures="0" errors="0" time="0.026">
+    <testcase name="status code is 200" time="0.026" classname="CollectionOf"/>
+    <testcase name="Es json" time="0.026" classname="CollectionOf"/>
+    <testcase name="La respuesta contiene contenido esperado" time="0.026" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.026" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.026" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="collection of gets / security question" id="28558f99-8398-4a36-91aa-7f925464977b" timestamp="2026-05-09T17:25:09.526Z" tests="5" failures="0" errors="0" time="0.026">
+    <testcase name="respuesta es json" time="0.026" classname="CollectionOf"/>
+    <testcase name="La respuesta contiene contenido esperado" time="0.026" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.026" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.026" classname="CollectionOf"/>
+    <testcase name="La respuesta incluye paginación" time="0.026" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="collection of gets / gets feedbacks" id="730fc08a-2186-4f57-ac70-7ab256c52218" timestamp="2026-05-09T17:25:09.526Z" tests="5" failures="0" errors="0" time="0.020">
+    <testcase name="respuesta es json" time="0.020" classname="CollectionOf"/>
+    <testcase name="La respuesta contiene contenido esperado" time="0.020" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.020" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.020" classname="CollectionOf"/>
+    <testcase name="La respuesta incluye paginación" time="0.020" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="colecction of post / create account" id="b637c946-0e65-453d-8800-3bb9a3fa6598" timestamp="2026-05-09T17:25:09.526Z" tests="4" failures="0" errors="0" time="0.037">
+    <testcase name="Se genera un ID" time="0.037" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.037" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.037" classname="CollectionOf"/>
+    <testcase name="Status 201" time="0.037" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="colecction of post / security answer" id="09172ea8-ecd6-4f29-afbd-ac8168b2c8c5" timestamp="2026-05-09T17:25:09.526Z" tests="4" failures="0" errors="0" time="0.030">
+    <testcase name="La respuesta incluye los datos esperados" time="0.030" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.030" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.030" classname="CollectionOf"/>
+    <testcase name="Se genera un ID" time="0.030" classname="CollectionOf"/>
+  </testsuite>
+  <testsuite name="colecction of post / login" id="27ae9277-d2af-4fad-af1b-1b563aa81187" timestamp="2026-05-09T17:25:09.526Z" tests="4" failures="0" errors="0" time="0.036">
+    <testcase name="Login exitoso" time="0.036" classname="CollectionOf"/>
+    <testcase name="Verificar datos del usuario" time="0.036" classname="CollectionOf"/>
+    <testcase name="Tiempo de respuesta aceptable" time="0.036" classname="CollectionOf"/>
+    <testcase name="La respuesta no está vacía" time="0.036" classname="CollectionOf"/>
+  </testsuite>
+</testsuites>
