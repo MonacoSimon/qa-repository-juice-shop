@@ -5,7 +5,7 @@ pipeline {
 
         stage('Levantar Juice Shop') {
             steps {
-                sh 'docker-compose up -d juice-shop'
+                sh 'docker compose up -d juice-shop'
             }
         }
 
@@ -14,25 +14,25 @@ pipeline {
 
                 stage('Cypress') {
                     steps {
-                        sh 'docker-compose up cypress-tests'
+                        sh 'docker compose up cypress-tests'
                     }
                 }
 
                 stage('API') {
                     steps {
-                        sh 'docker-compose up api-tests'
+                        sh 'docker compose up api-tests'
                     }
                 }
 
                 stage('JMeter') {
                     steps {
-                        sh 'docker-compose up jmeter-tests'
+                        sh 'docker compose up jmeter-tests'
                     }
                 }
 
                 stage('ZAP') {
                     steps {
-                        sh 'docker-compose up zap-tests'
+                        sh 'docker compose up zap-tests'
                     }
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
 
     post {
         always {
-            sh 'docker-compose down --remove-orphans'
+            sh 'docker compose down --remove-orphans'
         }
 
         success {
