@@ -1,33 +1,23 @@
+import CreateEmail from '../pages/CreateEmail'
+import HomePage from '../pages/HomePage'
+import SkipOverlay from '../pages/SkipOverlay'
+import CreateAccount from '../pages/CreateAccount'
+
 describe('template prueba juice shop', () => {
+  const create = new CreateEmail();
+  const homePage = new HomePage();
+  const skip = new SkipOverlay();
+  const createAccount = new CreateAccount();
+
   it('passes', () => {
-    const email = `simon_${Date.now()}@test.com`
-    cy.visit('http://localhost:3000/#/')
+    const email = create.create();
 
-    cy.get('.cc-btn', { timeout: 10000 })
-      .should('be.visible')
-      .click()
+    homePage.goHomePage();
 
-    cy.get('.cc-window').should('not.be.visible')
+    skip.skip();
 
-    cy.contains('Dismiss')
-      .should('be.visible')
-      .click()
+    createAccount.fill(email);
 
-    cy.get('#navbarAccount > .mdc-button__label > span').click()
-    cy.get('.mat-mdc-menu-item-text > span').click()
-    cy.wait(1000)
-    cy.get('#newCustomerLink > .primary-link').click()
-    cy.get('#registration-form > :nth-child(1) > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').type(email)
-    cy.get('#registration-form > :nth-child(2) > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').type('12345')
-    cy.get('#repeatPasswordControl').type('12345')
-    cy.get('.mat-mdc-form-field-type-mat-select > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').click()
-    cy.get('#mat-option-4 > .mdc-list-item__primary-text').click()
-    cy.get('#securityAnswerControl').type('Juice Shop')
-    cy.get('#registerButton > .mdc-button__label').click()
-    cy.get('[name="email"]').type(email)
-    cy.get('[name="password"]').type('12345')
-    cy.get('#rememberMe-input').click()
-    cy.get('#loginButton > .mdc-button__label').click()
-    cy.get('.mdc-button.ng-star-inserted > .mdc-button__label > .hide-lt-md').should('be.visible')
+    cy.get('.hide-lt-sm').should('be.visible')
   })
 })

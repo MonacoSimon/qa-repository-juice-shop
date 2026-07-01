@@ -1,17 +1,16 @@
-describe('template prueba juice shop', () => {
+import HomePage from "../pages/HomePage"
+import SkipOverlay from "../pages/SkipOverlay";
+
+describe('template test juice shop', () => {
+  const goHome = new HomePage();
+  const skip = new SkipOverlay();
+
   it('passes', () => {
-    cy.visit('http://localhost:3000/#/')
+    goHome.goHomePage();
 
-    cy.get('.cc-btn', { timeout: 10000 })
-      .should('be.visible')
-      .click()
+    skip.skip();
 
-    cy.get('.cc-window').should('not.be.visible')
-
-    cy.contains('Dismiss')
-      .should('be.visible')
-      .click()
-    cy.get('.mdc-icon-button > .mat-icon').click()
+    cy.get('.mdc-icon-button.mat-mdc-tooltip-trigger > .mat-icon').click()
     cy.get('[routerlink="/about"] > .mdc-list-item__content > .mat-mdc-list-item-unscoped-content > .menu-text').click()
     cy.get('.text-justify').should('be.visible')
   })

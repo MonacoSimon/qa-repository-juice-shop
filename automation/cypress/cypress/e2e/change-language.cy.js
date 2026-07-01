@@ -1,18 +1,17 @@
+import HomePage from "../pages/HomePage"
+import SkipOverlay from "../pages/SkipOverlay";
+
 describe('template prueba juice shop', () => {
+  const goHome = new HomePage();
+  const skip = new SkipOverlay();
+
   it('passes', () => {
-    cy.visit('http://localhost:3000/#/')
+    goHome.goHomePage()
 
-    cy.get('.cc-btn', { timeout: 10000 })
-      .should('be.visible')
-      .click()
+    skip.skip();
 
-    cy.get('.cc-window').should('not.be.visible')
-
-    cy.contains('Dismiss')
-      .should('be.visible')
-      .click()
-    cy.get('.mdc-button__label > .hide-lt-md').click()
-    cy.get('#mat-radio-8 > .mdc-form-field > .mdc-label > .mat-body').click()
-    cy.get('.heading > .ng-star-inserted').contains('Todos los Productos').should('be.visible')
+    cy.get('#navbarLanguageButton > .mdc-button__label > .hide-lt-md').click()
+    cy.get('#mat-radio-8-input').click()
+    cy.get('.heading > :nth-child(1)').contains('Todos los Productos').should('be.visible')
   })
 })

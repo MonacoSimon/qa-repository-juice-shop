@@ -1,50 +1,47 @@
+import HomePage from '../pages/HomePage'
+import SkipOverlay from '../pages/SkipOverlay'
+import CreateEmail from '../pages/CreateEmail'
+import CreateAccount from '../pages/CreateAccount'
+import FillCreditCard from '../pages/FillCreditCard'
+
 describe('template prueba juice shop', () => {
+  const homePage = new HomePage();
+  const skipOverlay = new SkipOverlay();
+  const createEmail = new CreateEmail();
+  const createAccount = new CreateAccount();
+  const fillCreditCard = new FillCreditCard();
+
   it('passes', () => {
-    const email = `simon_${Date.now()}@test.com`
-    cy.visit('http://localhost:3000/#/')
+    const email = createEmail.create();
 
-    cy.get('.cc-btn', { timeout: 10000 })
-      .should('be.visible')
-      .click()
+    homePage.goHomePage();
 
-    cy.get('.cc-window').should('not.be.visible')
+    skipOverlay.skip();
 
-    cy.contains('Dismiss')
-      .should('be.visible')
-      .click()
+    createAccount.fill(email);
 
-    cy.get('#navbarAccount > .mdc-button__label > span').click()
-    cy.get('.mat-mdc-menu-item-text > span').click()
-    cy.wait(1000)
-    cy.get('#newCustomerLink > .primary-link').click()
-    cy.get('#registration-form > :nth-child(1) > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').type(email)
-    cy.get('#registration-form > :nth-child(2) > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').type('12345')
-    cy.get('#repeatPasswordControl').type('12345')
-    cy.get('.mat-mdc-form-field-type-mat-select > .mat-mdc-text-field-wrapper > .mat-mdc-form-field-flex > .mat-mdc-form-field-infix').click()
-    cy.get('#mat-option-4 > .mdc-list-item__primary-text').click()
-    cy.get('#securityAnswerControl').type('Juice Shop')
-    cy.get('#registerButton > .mdc-button__label').click()
-    cy.get('[name="email"]').type(email)
-    cy.get('[name="password"]').type('12345')
-    cy.get('#rememberMe-input').click()
-    cy.get('#loginButton > .mdc-button__label').click()
-    cy.get('.mdc-button.ng-star-inserted > .mdc-button__label > .hide-lt-md').should('be.visible')
+    cy.get('.hide-lt-sm').should('be.visible')
+
     cy.get('#navbarAccount > .mdc-button__label > span').click()
     cy.get('[aria-label="Show Orders and Payment Menu"] > .mat-mdc-menu-item-text > span').click()
     cy.get('[routerlink="/wallet"] > .mat-mdc-menu-item-text > span').click()
     cy.get('h1').should('be.visible')
-    cy.get('mat-label').type('199')
+    cy.get('#mat-input-9').type('11')
     cy.get('#submitButton > .mdc-button__label').click()
     cy.get('.mat-expansion-panel-header-title').click()
-    cy.get('#mat-input-11').type('dd')
-    cy.get('#mat-mdc-form-field-label-15 > mat-label').type('2222222222222222')
-    cy.get('#mat-input-13').select(1)
-    cy.get('#mat-input-14').select(1)
-    cy.get('#submitButton > .mdc-button__label').click()
-    cy.get('#mat-radio-42-input').click()
+
+    cy.get('#mat-input-10').type('fake name')
+    cy.get('#mat-input-11').type('1112223334445556')
+    cy.get('#mat-input-12').select('12')
+    cy.get('#mat-input-13').select('2081')
+    cy.get('#submitButton > .mdc-button__label').click({ force: true })
+
+    cy.get('.mat-mdc-row > .cdk-column-Name').should('contain', 'fake name')
+
+    cy.get('#mat-radio-42-input').click({ force: true })
+
     cy.get('.nextButton > .mdc-button__label > span').click({ force: true })
-    cy.get('mat-label').type('199')
-    cy.get('#submitButton > .mdc-button__label').click()
-    cy.get('h1').should('be.visible')
+
+    cy.get('.confirmation').should('contain', '11.00')
   })
 })
